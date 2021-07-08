@@ -5,5 +5,4 @@
     <select id="list" resultType="com.zkb.wiki.domain.Test">
         select `id`, `name`, `password` from `test`
     </select>
-
 </mapper>
