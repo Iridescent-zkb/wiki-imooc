@@ -25,7 +25,7 @@
                             文档管理
                         </a-button>
                     </router-link>-->
-                    <a-button type="primary"  @click="edit">
+                    <a-button type="primary"  @click="edit(record)">
                         编辑
                     </a-button>
 <!--                    <a-popconfirm-->
@@ -50,7 +50,25 @@
             :confirm-loading="modalLoading"
             @ok="handleModalOk"
     >
-        <p>test</p>
+        <a-form :model="ebook" :label-col="{ span: 6 }" >
+            <a-form-item label="封面">
+                <a-input v-model:value="ebook.cover" />
+            </a-form-item>
+            <a-form-item label="名称">
+                <a-input v-model:value="ebook.name" />
+            </a-form-item>
+            <a-form-item label="分类一">
+                <a-input v-model:value="ebook.category1Id" />
+            </a-form-item>
+            <a-form-item label="分类二">
+                <a-input v-model:value="ebook.category2Id" />
+            </a-form-item>
+
+
+            <a-form-item label="描述">
+                <a-input v-model:value="ebook.description" type="textarea" />
+            </a-form-item>
+        </a-form>
     </a-modal>
 </template>
 
@@ -148,8 +166,8 @@
             /**
              * 数组，[100, 101]对应：前端开发 / Vue
              */
-            // const categoryIds = ref();
-            // const ebook = ref();
+            //const categoryIds = ref();
+             const ebook = ref({});
             const modalVisible = ref(false);
             const modalLoading = ref(false);
             const handleModalOk = () => {
@@ -160,9 +178,12 @@
                 }, 2000);
             };
 
-            const edit = () => {
+            /**
+            * 编辑
+            **/
+            const edit = (record:any) => {
                 modalVisible.value = true;
-                // ebook.value = Tool.copy(record);
+                ebook.value = record;
                 // categoryIds.value = [ebook.value.category1Id, ebook.value.category2Id]
             };
             //     ebook.value.category1Id = categoryIds.value[0];
@@ -187,6 +208,7 @@
                 handleTableChange,
 
                 edit,
+                ebook,
                 modalVisible,
                 modalLoading,
                 handleModalOk
