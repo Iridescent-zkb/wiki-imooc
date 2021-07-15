@@ -25,7 +25,7 @@
                             文档管理
                         </a-button>
                     </router-link>-->
-                    <a-button type="primary" >
+                    <a-button type="primary"  @click="edit">
                         编辑
                     </a-button>
 <!--                    <a-popconfirm-->
@@ -44,7 +44,17 @@
 
     </a-layout-content>
   </a-layout>
+    <a-modal
+            title="电子书表单"
+            v-model:visible="modalVisible"
+            :confirm-loading="modalLoading"
+            @ok="handleModalOk"
+    >
+        <p>test</p>
+    </a-modal>
 </template>
+
+
 <script lang="ts">
     import { defineComponent, onMounted, ref } from 'vue';
     import axios from 'axios';
@@ -134,16 +144,27 @@
                 });
             };
 
-            // // -------- 表单 ---------
-            // /**
-            //  * 数组，[100, 101]对应：前端开发 / Vue
-            //  */
+            // -------- 表单 ---------
+            /**
+             * 数组，[100, 101]对应：前端开发 / Vue
+             */
             // const categoryIds = ref();
             // const ebook = ref();
-            // const modalVisible = ref(false);
-            // const modalLoading = ref(false);
-            // const handleModalOk = () => {
-            //     modalLoading.value = true;
+            const modalVisible = ref(false);
+            const modalLoading = ref(false);
+            const handleModalOk = () => {
+                modalLoading.value = true;
+                setTimeout(() => {
+                    modalVisible.value = false;
+                    modalLoading.value = false;
+                }, 2000);
+            };
+
+            const edit = () => {
+                modalVisible.value = true;
+                // ebook.value = Tool.copy(record);
+                // categoryIds.value = [ebook.value.category1Id, ebook.value.category2Id]
+            };
             //     ebook.value.category1Id = categoryIds.value[0];
             //     ebook.value.category2Id = categoryIds.value[1];
             //     axios.post("/ebook/save", ebook.value).then((response) => {
@@ -163,7 +184,14 @@
                 pagination,
                 columns,
                 loading,
-                handleTableChange
+                handleTableChange,
+
+                edit,
+                modalVisible,
+                modalLoading,
+                handleModalOk
+
+
             }
         }
     });
