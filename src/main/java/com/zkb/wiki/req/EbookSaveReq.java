@@ -1,6 +1,6 @@
-package com.zkb.wiki.resp;
+package com.zkb.wiki.req;
 
-public class EbookResp {
+public class EbookSaveReq {
     private Long id;
 
     private String name;
