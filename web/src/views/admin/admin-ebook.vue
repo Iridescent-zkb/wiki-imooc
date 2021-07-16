@@ -16,6 +16,7 @@
                 :pagination="pagination"
                 :loading="loading"
                 @change="handleTableChange"
+
         >
             <template #cover="{ text: cover }">
                 <img v-if="cover" :src="cover" alt="avatar" />
@@ -252,3 +253,11 @@
 
 
 </script>
+
+
+<style scoped>
+    img {
+        width: 50px;
+        height: 50px;
+    }
+</style>
