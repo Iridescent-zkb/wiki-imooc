@@ -16,6 +16,7 @@
                 :pagination="pagination"
                 :loading="loading"
                 @change="handleTableChange"
+
         >
             <template #cover="{ text: cover }">
                 <img v-if="cover" :src="cover" alt="avatar" />
@@ -39,9 +40,19 @@
 <!--                            cancel-text="否"-->
 <!--                            @confirm="handleDelete(record.id)"-->
 <!--                    >-->
+
+                    <a-popconfirm
+                            title="删除后不可恢复，确认删除？"
+                            ok-text="是"
+                            cancel-text="否"
+                            @confirm="handleDelete(record.id)"
+
+                    >
                         <a-button type="danger">
                             删除
                         </a-button>
+                    </a-popconfirm>
+
 <!--                    </a-popconfirm>-->
                 </a-space>
             </template>
@@ -219,12 +230,30 @@
                 ebook.value = {};
 
             };
+
+            const handleDelete = (id : number) =>{
+                axios.delete("/ebook/delete/" + id).then((response) => {
+                    const data = response.data;  //data = commonResp
+                    if (data.success){
+                        //重新加载列表
+                        handleQuery({
+                            page:pagination.value.current,
+                            size:pagination.value.pageSize
+                        });
+                    }
+
+                });
+            };
+
+
             onMounted(() => {
                 handleQuery({
                     page:1,
                     size:pagination.value.pageSize
                 });
             });
+
+
             return {
                 //表格
                 ebooks,
@@ -242,7 +271,9 @@
                 ebook,
                 modalVisible,
                 modalLoading,
-                handleModalOk
+                handleModalOk,
+
+                handleDelete
 
 
             }
@@ -252,6 +283,7 @@
 
 
 </script>
+
 
 <style scoped>
     img {
