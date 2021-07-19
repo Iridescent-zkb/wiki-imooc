@@ -16,34 +16,35 @@ import java.util.List;
 @RestController
 @RequestMapping("/doc")
 public class DocController {
+
     @Resource
     private DocService docService;
 
-
     @GetMapping("/all/{ebookId}")
-    public CommonResp all(@PathVariable Long ebookId){
+    public CommonResp all(@PathVariable Long ebookId) {
         CommonResp<List<DocQueryResp>> resp = new CommonResp<>();
-        List<DocQueryResp> list= docService.all(ebookId);
+        List<DocQueryResp> list = docService.all(ebookId);
         resp.setContent(list);
         return resp;
     }
 
     @GetMapping("/list")
-    public CommonResp list(@Valid DocQueryReq req){
+    public CommonResp list(@Valid DocQueryReq req) {
         CommonResp<PageResp<DocQueryResp>> resp = new CommonResp<>();
-        PageResp<DocQueryResp> list= docService.list(req);
+        PageResp<DocQueryResp> list = docService.list(req);
         resp.setContent(list);
         return resp;
     }
+
     @PostMapping("/save")
-    public CommonResp save(@Valid @RequestBody DocSaveReq req){
+    public CommonResp save(@Valid @RequestBody DocSaveReq req) {
         CommonResp resp = new CommonResp<>();
-         docService.save(req);
+        docService.save(req);
         return resp;
     }
 
     @DeleteMapping("/delete/{idsStr}")
-    public CommonResp delete(@PathVariable String idsStr){
+    public CommonResp delete(@PathVariable String idsStr) {
         CommonResp resp = new CommonResp<>();
         List<String> list = Arrays.asList(idsStr.split(","));
         docService.delete(list);
