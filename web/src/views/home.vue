@@ -40,11 +40,10 @@
 
           <a-list-item-meta :description="item.description">
             <template #title>
-              <a :href="item.href">{{ item.name }}</a>
+              <router-link :to="'/doc?eboolId='+item.id">{{ item.name }}</router-link>
             </template>
             <template #avatar><a-avatar :src="item.cover" /></template>
           </a-list-item-meta>
-
         </a-list-item>
       </template>
     </a-list>
