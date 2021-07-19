@@ -9,6 +9,7 @@
                   @select="onSelect"
                   :replaceFields="{title: 'name', key: 'id', value: 'id'}"
                   :defaultExpandAll="true"
+                  :defaultSelectedKeys="defaultSelectedKeys"
           >
           </a-tree>
         </a-col>
@@ -32,7 +33,8 @@
       const route = useRoute();
       const docs = ref();
       const html = ref();
-
+      const defaultSelectedKeys = ref();
+      defaultSelectedKeys.value = [];
       /**
        * 一级文档树，children属性就是二级文档
        * [{
@@ -47,6 +49,20 @@
       const level1 = ref(); // 一级文档树，children属性就是二级文档
       level1.value = [];
 
+        /**
+         * 内容查询
+         **/
+        const handleQueryContent = (id: number) => {
+            axios.get("/doc/find-content/" + id).then((response) => {
+                const data = response.data;
+                if (data.success) {
+                    html.value = data.content;
+                } else {
+                    message.error(data.message);
+                }
+            });
+        };
+
       /**
        * 数据查询
        **/
@@ -58,25 +74,18 @@
 
             level1.value = [];
             level1.value = Tool.array2Tree(docs.value, 0);
+
+              if (Tool.isNotEmpty(level1)) {
+                  defaultSelectedKeys.value = [level1.value[0].id];
+                  handleQueryContent(level1.value[0].id);
+              }
           } else {
             message.error(data.message);
           }
         });
       };
 
-      /**
-       * 内容查询
-       **/
-      const handleQueryContent = (id: number) => {
-        axios.get("/doc/find-content/" + id).then((response) => {
-          const data = response.data;
-          if (data.success) {
-            html.value = data.content;
-          } else {
-            message.error(data.message);
-          }
-        });
-      };
+
 
       const onSelect = (selectedKeys: any, info: any) => {
         console.log('selected', selectedKeys, info);
@@ -93,7 +102,8 @@
       return {
         level1,
         html,
-        onSelect
+        onSelect,
+        defaultSelectedKeys
       }
     }
   });
