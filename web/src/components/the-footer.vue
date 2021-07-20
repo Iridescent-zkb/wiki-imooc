@@ -1,6 +1,6 @@
 <template>
     <a-layout-footer style="text-align: center">
-        wiki知识库，欢迎：{{user.name}}
+        wiki知识库<span v-show="user.id">，欢迎：{{user.name}}</span>
     </a-layout-footer>
 </template>
 
