@@ -6,6 +6,7 @@ import com.zkb.wiki.resp.CommonResp;
 import com.zkb.wiki.resp.UserQueryResp;
 import com.zkb.wiki.resp.PageResp;
 import com.zkb.wiki.service.UserService;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -28,6 +29,7 @@ public class UserController {
 
     @PostMapping("/save")
     public CommonResp save(@Valid @RequestBody UserSaveReq req) {
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
         CommonResp resp = new CommonResp<>();
         userService.save(req);
         return resp;
