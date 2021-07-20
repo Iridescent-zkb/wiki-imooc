@@ -8,6 +8,7 @@ import com.zkb.wiki.exception.BusinessException;
 import com.zkb.wiki.exception.BusinessExceptionCode;
 import com.zkb.wiki.mapper.UserMapper;
 import com.zkb.wiki.req.UserQueryReq;
+import com.zkb.wiki.req.UserResetPasswordReq;
 import com.zkb.wiki.req.UserSaveReq;
 import com.zkb.wiki.resp.PageResp;
 import com.zkb.wiki.resp.UserQueryResp;
@@ -105,5 +106,14 @@ public class UserService {
         } else {
             return userList.get(0);
         }
+    }
+
+
+    /**
+     * 修改密码
+     */
+    public void resetPassword( UserResetPasswordReq req) {
+        User user = CopyUtil.copy(req, User.class);
+        userMapper.updateByPrimaryKeySelective(user);
     }
 }
