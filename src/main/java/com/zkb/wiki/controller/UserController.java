@@ -1,10 +1,12 @@
 package com.zkb.wiki.controller;
 
+import com.zkb.wiki.req.UserLoginReq;
 import com.zkb.wiki.req.UserQueryReq;
 import com.zkb.wiki.req.UserResetPasswordReq;
 import com.zkb.wiki.req.UserSaveReq;
 import com.zkb.wiki.resp.CommonResp;
 import com.zkb.wiki.resp.PageResp;
+import com.zkb.wiki.resp.UserLoginResp;
 import com.zkb.wiki.resp.UserQueryResp;
 import com.zkb.wiki.service.UserService;
 import org.springframework.util.DigestUtils;
@@ -48,6 +50,15 @@ public class UserController {
         req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
         CommonResp resp = new CommonResp<>();
         userService.resetPassword(req);
+        return resp;
+    }
+
+    @PostMapping("/login")
+    public CommonResp login(@Valid @RequestBody UserLoginReq req) {
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
+        CommonResp<UserLoginResp> resp = new CommonResp<>();
+        UserLoginResp userLoginResp = userService.login(req);
+        resp.setContent(userLoginResp);
         return resp;
     }
 }
