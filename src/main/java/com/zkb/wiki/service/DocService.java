@@ -5,6 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.zkb.wiki.domain.Content;
 import com.zkb.wiki.domain.Doc;
 import com.zkb.wiki.domain.DocExample;
+import com.zkb.wiki.exception.BusinessException;
+import com.zkb.wiki.exception.BusinessExceptionCode;
 import com.zkb.wiki.mapper.ContentMapper;
 import com.zkb.wiki.mapper.DocMapper;
 import com.zkb.wiki.mapper.DocMapperCust;
@@ -129,5 +131,19 @@ public class DocService {
             return content.getContent();
         }
     }
+
+    /**
+     * 点赞
+     */
+    public void vote(Long id) {
+        // docMapperCust.increaseVoteCount(id);
+        // 远程IP+doc.id作为key，24小时内不能重复
+//        String ip = RequestContext.getRemoteAddr();
+//        if (redisUtil.validateRepeat("DOC_VOTE_" + id + "_" + ip, 5000)) {
+            docMapperCust.increaseVoteCount(id);
+//        } else {
+//            throw new BusinessException(BusinessExceptionCode.VOTE_REPEAT);
+        }
+
 }
 
