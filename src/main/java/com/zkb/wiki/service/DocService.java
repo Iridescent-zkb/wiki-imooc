@@ -15,6 +15,8 @@ import com.zkb.wiki.req.DocSaveReq;
 import com.zkb.wiki.resp.DocQueryResp;
 import com.zkb.wiki.resp.PageResp;
 import com.zkb.wiki.util.CopyUtil;
+import com.zkb.wiki.util.RedisUtil;
+import com.zkb.wiki.util.RequestContext;
 import com.zkb.wiki.util.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +43,9 @@ public class DocService {
 
     @Resource
     private SnowFlake snowFlake;
+
+    @Resource
+    public RedisUtil redisUtil;
 
     public List<DocQueryResp> all(Long ebookId) {
         DocExample docExample = new DocExample();
@@ -138,12 +143,12 @@ public class DocService {
     public void vote(Long id) {
         // docMapperCust.increaseVoteCount(id);
         // 远程IP+doc.id作为key，24小时内不能重复
-//        String ip = RequestContext.getRemoteAddr();
-//        if (redisUtil.validateRepeat("DOC_VOTE_" + id + "_" + ip, 5000)) {
+        String ip = RequestContext.getRemoteAddr();
+        if (redisUtil.validateRepeat("DOC_VOTE_" + id + "_" + ip, 5000)) {
             docMapperCust.increaseVoteCount(id);
-//        } else {
-//            throw new BusinessException(BusinessExceptionCode.VOTE_REPEAT);
+        } else {
+            throw new BusinessException(BusinessExceptionCode.VOTE_REPEAT);
         }
-
+    }
 }
 
