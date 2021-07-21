@@ -24,6 +24,7 @@ import javax.annotation.Resource;
      public void onMessage(MessageExt messageExt) {
          byte[] body = messageExt.getBody();
          LOG.info("ROCKETMQ收到消息：{}", new String(body));
+         //下面一条是新增的
          webSocketServer.sendInfo(new String(body));
      }
  }
