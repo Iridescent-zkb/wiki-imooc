@@ -1,4 +1,4 @@
-package com.zkb.wiki.config;
+package com.zkb.wiki.controller;
 
 import com.zkb.wiki.resp.CommonResp;
 import com.zkb.wiki.resp.StatisticResp;
@@ -20,6 +20,14 @@ public class EbookSnapshotController {
     @GetMapping("/get-statistic")
     public CommonResp getStatistic() {
         List<StatisticResp> statisticResp = ebookSnapshotService.getStatistic();
+        CommonResp<List<StatisticResp>> commonResp = new CommonResp<>();
+        commonResp.setContent(statisticResp);
+        return commonResp;
+    }
+
+    @GetMapping("/get-30-statistic")
+    public CommonResp get30Statistic() {
+        List<StatisticResp> statisticResp = ebookSnapshotService.get30Statistic();
         CommonResp<List<StatisticResp>> commonResp = new CommonResp<>();
         commonResp.setContent(statisticResp);
         return commonResp;
