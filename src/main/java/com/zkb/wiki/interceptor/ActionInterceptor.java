@@ -2,6 +2,8 @@ package com.zkb.wiki.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zkb.wiki.resp.CommonResp;
+import com.zkb.wiki.resp.UserLoginResp;
+import com.zkb.wiki.util.LoginUserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,11 @@ public class ActionInterceptor implements HandlerInterceptor {
         if("OPTIONS".equals(request.getMethod().toUpperCase())){
             return true;
         }
+        UserLoginResp userLoginResp = LoginUserContext.getUser();
+                if ("admin".equals(userLoginResp.getLoginName())) {
+                        // admin用户不拦截
+                                return true;
+                    }
 
         LOG.info("操作被拦截");
         response.setStatus(HttpStatus.OK.value());
