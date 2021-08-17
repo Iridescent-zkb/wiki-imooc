@@ -6,12 +6,13 @@
 
             :style="{ height: '100%', borderRight: 0 }"
             @click="handleClick"
+            :openKeys="openKeys"
     >
       <a-menu-item key="welcome">
         <MailOutlined />
         <span>欢迎</span>
       </a-menu-item>
-      <a-sub-menu v-for="item in level1" :key="item.id" >
+      <a-sub-menu v-for="item in level1" :key="item.id"  :disabled="true" >
         <template v-slot:title>
           <span><user-outlined />{{item.name}}</span>
         </template>
@@ -94,6 +95,7 @@ export default defineComponent({
     const ebooks =ref();
    // const ebooks1 =reactive({books:[]});
 
+    const openKeys =  ref();
 
     const level1 =  ref();
     let categorys: any;
@@ -108,10 +110,10 @@ export default defineComponent({
           console.log("原始数组：", categorys);
 
           // 加载完分类后，将侧边栏全部展开
-          // level1.value = [];
-          // for (let i = 0; i < categorys.length; i++) {
-          //   level1.value.push(categorys[i].id)
-          // }
+          level1.value = [];
+          for (let i = 0; i < categorys.length; i++) {
+            level1.value.push(categorys[i].id)
+          }
 
           level1.value = [];
           level1.value = Tool.array2Tree(categorys, 0);
@@ -178,7 +180,10 @@ export default defineComponent({
       handleClick,
       level1,
 
-      isShowWelcome
+      isShowWelcome,
+
+      openKeys
+
     }
   }
 
