@@ -47,12 +47,6 @@
                     <a-button type="primary"  @click="edit(record)">
                         编辑
                     </a-button>
-<!--                    <a-popconfirm-->
-<!--                            title="删除后不可恢复，确认删除?"-->
-<!--                            ok-text="是"-->
-<!--                            cancel-text="否"-->
-<!--                            @confirm="handleDelete(record.id)"-->
-<!--                    >-->
 
                     <a-popconfirm
                             title="删除后不可恢复，确认删除？"
@@ -66,7 +60,6 @@
                         </a-button>
                     </a-popconfirm>
 
-<!--                    </a-popconfirm>-->
                 </a-space>
             </template>
         </a-table>
@@ -232,14 +225,6 @@
                 ebook.value = Tool.copy(record);
                 categoryIds.value = [ebook.value.category1Id, ebook.value.category2Id]
             };
-            //     ebook.value.category1Id = categoryIds.value[0];
-            //     ebook.value.category2Id = categoryIds.value[1];
-            //     axios.post("/ebook/save", ebook.value).then((response) => {
-            //         modalLoading.value = false;
-            //         const data = response.data; // data = commonResp
-            //         if (data.success) {
-            //             modalVisible.value = false;
-
 
             /**
              * 新增

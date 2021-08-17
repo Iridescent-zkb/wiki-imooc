@@ -41,26 +41,11 @@
             <template #cover="{ text: cover }">
                 <img v-if="cover" :src="cover" alt="avatar" />
             </template>
-<!--            <template v-slot:category="{ text, record }">-->
-<!--                <span>{{ getCategoryName(record.category1Id) }} / {{ getCategoryName(record.category2Id) }}</span>-->
-<!--            </template>-->
             <template v-slot:action="{ text, record }">
                 <a-space size="small">
-      <!--              <router-link :to="'/admin/doc?categoryId=' + record.id">
-                        <a-button type="primary">
-                            文档管理
-                        </a-button>
-                    </router-link>-->
                     <a-button type="primary"  @click="edit(record)">
                         编辑
                     </a-button>
-<!--                    <a-popconfirm-->
-<!--                            title="删除后不可恢复，确认删除?"-->
-<!--                            ok-text="是"-->
-<!--                            cancel-text="否"-->
-<!--                            @confirm="handleDelete(record.id)"-->
-<!--                    >-->
-
                     <a-popconfirm
                             title="删除后不可恢复，确认删除？"
                             ok-text="是"
@@ -73,7 +58,6 @@
                         </a-button>
                     </a-popconfirm>
 
-<!--                    </a-popconfirm>-->
                 </a-space>
             </template>
         </a-table>
@@ -220,16 +204,7 @@
             const edit = (record:any) => {
                 modalVisible.value = true;
                 category.value = Tool.copy(record);
-                // categoryIds.value = [category.value.category1Id, category.value.category2Id]
             };
-            //     category.value.category1Id = categoryIds.value[0];
-            //     category.value.category2Id = categoryIds.value[1];
-            //     axios.post("/category/save", category.value).then((response) => {
-            //         modalLoading.value = false;
-            //         const data = response.data; // data = commonResp
-            //         if (data.success) {
-            //             modalVisible.value = false;
-
 
             /**
              * 新增
