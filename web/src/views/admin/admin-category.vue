@@ -85,6 +85,7 @@
                         v-model:value="category.parent"
                         ref="select"
                 >
+
                     <a-select-option :value="0">
                         无
                     </a-select-option>
@@ -125,8 +126,6 @@
                     key:'parent',
                     dataIndex: 'parent'
                 },
-
-
                 {
                     title: '顺序',
                     dataIndex: 'sort'
