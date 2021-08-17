@@ -1,17 +1,19 @@
-# Getting Started
+知识库Wiki项目
+SpringBoot知识体系+Vue3 实战WIKI知识库系统
 
-### Reference Documentation
-For further reference, please consider the following sections:
+开发环境及需要软件
+jdk-8u221-windows-x64.exe<br>
+ideaIU-2019.2.3.exe<br>
+Git-2.23.0-64-bit.exe<br>
+mysql-installer-community-5.7.27.0.msi<br>
+jdk-8u261-linux-x64.tar.gz<br>
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.5.1/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.5.1/maven-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.5.1/reference/htmlsingle/#boot-features-developing-web-applications)
 
-### Guides
-The following guides illustrate how to use some features concretely:
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+项目启动
+启动服务端：WikiApplication
+启动前端网站：web\package.json
 
+页面访问
+网站地址: http://www.wiki-one.xyz
+初始用户名密码：test/test
