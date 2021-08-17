@@ -195,8 +195,6 @@
                     const data = response.data;  //data = commonResp
                     if (data.success){
                         modalVisible.value = false;
-
-
                         //重新加载列表
                         handleQuery();
                     }else {
@@ -237,9 +235,9 @@
                     const data = response.data;  //data = commonResp
                     if (data.success){
                         //重新加载列表
-                        handleQuery();
+                    } else {
+                        message.error(data.message);
                     }
-
                 });
             };
 
